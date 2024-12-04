@@ -7,6 +7,14 @@ const SigninForm = () => {
       <Formik
         initialValues={{
           firstName: "",
+          lastName: "",
+          gender: "",
+          email: "",
+          phone: "",
+          password: "",
+          confirmPassword: "",
+          subscription: "",
+          termsAndCondtions: "",
         }}
       >
         {(formik) => (
@@ -45,6 +53,9 @@ const SigninForm = () => {
                     name="gender"
                     id="male"
                     value="male"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    checked={formik.values.gender === "male"}
                   />
                   <label className="form-check-label" for="male">
                     Male
@@ -57,6 +68,9 @@ const SigninForm = () => {
                     name="gender"
                     id="female"
                     value="female"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    checked={formik.values.gender === "female"}
                   />
                   <label className="form-check-label" for="female">
                     Female
@@ -69,6 +83,9 @@ const SigninForm = () => {
                     name="gender"
                     id="other"
                     value="other"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    checked={formik.values.gender === "other"}
                   />
                   <label className="form-check-label" for="other">
                     Other
