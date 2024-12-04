@@ -6,15 +6,41 @@ const SigninForm = () => {
     <>
       <Formik
         initialValues={{
-          firstName: "",
+          firstName: "gaurav",
           lastName: "",
-          gender: "",
+          gender: "male",
           email: "",
           phone: "",
           password: "",
           confirmPassword: "",
           subscription: "",
           termsAndCondtions: "",
+        }}
+        validate={(values) => {
+          const errors = {};
+
+          if (!values.firstName) {
+            errors.firstName = "Required";
+          }
+
+          if (!values.email) {
+            errors.email = "Required";
+          } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+          ) {
+            errors.email = "Thsi must a valid email";
+          }
+          if (!values.password) {
+            errors.password = "Required";
+          }
+
+          if (!values.confirmPassword) {
+            errors.confirmPassword = "Required";
+          } else if (values.password !== values.confirmPassword) {
+            errors.confirmPassword =
+              "Confirm password must be equal to password";
+          }
+          return errors;
         }}
       >
         {(formik) => (
@@ -31,6 +57,7 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.firstName}
               />
+              <span className="field_error">{formik.errors.firstName}</span>
             </div>
             <div className="form-group mt-2">
               <label for="lastName">Last Name</label>
@@ -103,6 +130,7 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
               />
+              <span className="field_error">{formik.errors.email}</span>
             </div>
             <div className="form-group mt-2">
               <label for="phone">Phone Number</label>
@@ -125,6 +153,7 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
               />
+              <span className="field_error">{formik.errors.password}</span>
             </div>
             <div className="form-group mt-2">
               <label for="confirmPassword">Confirm Password</label>
@@ -136,6 +165,9 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.confirmPassword}
               />
+              <span className="field_error">
+                {formik.errors.confirmPassword}
+              </span>
             </div>
 
             <div className="form-group mt-2">
