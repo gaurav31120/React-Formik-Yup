@@ -17,6 +17,11 @@ const SignUpSchema = Yup.object().shape({
     [true],
     "Please accept terms and conditions"
   ),
+  additionalInfoFlag: Yup.boolean(),
+  additionalInfo: Yup.string().when("additionalInfoFlag", {
+    is: true,
+    then: () => Yup.string().required("This field is required"),
+  }),
 });
 
 const SigninForm = () => {
@@ -234,16 +239,42 @@ const SigninForm = () => {
                   className="form-check-input"
                   type="checkbox"
                   value=""
-                  id="additionalInfo"
+                  id="additionalInfoFlag"
+                  name="additionalInfoFlag"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.additionalInfo}
+                  value={formik.values.additionalInfoFlag}
                 />
-                <label className="form-check-label" htmlFor="additionalInfo">
+                <label
+                  className="form-check-label"
+                  htmlFor="additionalInfoFlag"
+                >
                   Additional Information
                 </label>
               </div>
             </div>
+
+            {formik.values.additionalInfoFlag && (
+              <div className="form-group mt-2">
+                <label htmlFor="additionalInfo">
+                  Enter additional Information
+                </label>
+                <textarea
+                  className="form-control"
+                  name="additionalInfo"
+                  id="additionalInfo"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.additionalInfo}
+                ></textarea>
+                {formik.touched.additionalInfo &&
+                  formik.errors.additionalInfo && (
+                    <span className="field_error">
+                      {formik.errors.additionalInfo}
+                    </span>
+                  )}
+              </div>
+            )}
 
             <div className="form-group mt-2">
               <div className="form-check">
