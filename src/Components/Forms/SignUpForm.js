@@ -1,11 +1,16 @@
 import { Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
+import "yup-phone";
+import "yup-phone-lite";
 
 const SignUpSchema = Yup.object().shape({
   firstName: Yup.string().required("This fiels is required"),
   email: Yup.string().email("Invalid email").required("This field is required"),
-  phone: Yup.number().required("This field is required"),
+  // phone: Yup.number().required("This field is required"),
+  phone: Yup.string()
+    .phone(null, true, "Please enter valid phone number4")
+    .required("Please enter valid phone number"),
   password: Yup.string()
     .required("This field is required")
     .min(6, "must be of 6 characters long"),
