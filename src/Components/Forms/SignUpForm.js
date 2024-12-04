@@ -6,7 +6,7 @@ const SigninForm = () => {
     <>
       <Formik
         initialValues={{
-          firstName: "gaurav",
+          firstName: "",
           lastName: "",
           gender: "male",
           email: "",
@@ -21,6 +21,10 @@ const SigninForm = () => {
 
           if (!values.firstName) {
             errors.firstName = "Required";
+          }
+
+          if (!values.lastName) {
+            errors.lastName = "Required";
           }
 
           if (!values.email) {
@@ -57,7 +61,9 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.firstName}
               />
-              <span className="field_error">{formik.errors.firstName}</span>
+              {formik.touched.firstName && formik.errors.firstName && (
+                <span className="field_error">{formik.errors.firstName}</span>
+              )}
             </div>
             <div className="form-group mt-2">
               <label for="lastName">Last Name</label>
@@ -69,6 +75,9 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.lastName}
               />
+              {formik.touched.lastName && formik.errors.lastName && (
+                <span className="field_error">{formik.errors.lastName}</span>
+              )}
             </div>
             <div className="form-group mt-2">
               <label>Gender</label>
@@ -130,7 +139,9 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
               />
-              <span className="field_error">{formik.errors.email}</span>
+              {formik.touched.email && formik.errors.email && (
+                <span className="field_error">{formik.errors.email}</span>
+              )}
             </div>
             <div className="form-group mt-2">
               <label for="phone">Phone Number</label>
@@ -153,7 +164,9 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
               />
-              <span className="field_error">{formik.errors.password}</span>
+              {formik.touched.password && formik.errors.password && (
+                <span className="field_error">{formik.errors.password}</span>
+              )}
             </div>
             <div className="form-group mt-2">
               <label for="confirmPassword">Confirm Password</label>
@@ -165,9 +178,12 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.confirmPassword}
               />
-              <span className="field_error">
-                {formik.errors.confirmPassword}
-              </span>
+              {formik.touched.confirmPassword &&
+                formik.errors.confirmPassword && (
+                  <span className="field_error">
+                    {formik.errors.confirmPassword}
+                  </span>
+                )}
             </div>
 
             <div className="form-group mt-2">
