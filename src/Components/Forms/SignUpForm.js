@@ -4,18 +4,36 @@ import React from "react";
 const SigninForm = () => {
   return (
     <>
-      <Formik>
+      <Formik
+        initialValues={{
+          firstName: "",
+        }}
+      >
         {(formik) => (
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             {console.log(formik)}
 
             <div className="form-group">
               <label for="firstName">First Name</label>
-              <input type="text" className="form-control" name="firstName" />
+              <input
+                type="text"
+                className="form-control"
+                name="firstName"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.firstName}
+              />
             </div>
             <div className="form-group mt-2">
               <label for="lastName">Last Name</label>
-              <input type="text" className="form-control" name="lastName" />
+              <input
+                type="text"
+                className="form-control"
+                name="lastName"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.lastName}
+              />
             </div>
             <div className="form-group mt-2">
               <label>Gender</label>
@@ -60,15 +78,36 @@ const SigninForm = () => {
             </div>
             <div className="form-group mt-2">
               <label for="email">Email</label>
-              <input type="text" className="form-control" name="email" />
+              <input
+                type="text"
+                className="form-control"
+                name="email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
             </div>
             <div className="form-group mt-2">
               <label for="phone">Phone Number</label>
-              <input type="number" className="form-control" name="phone" />
+              <input
+                type="number"
+                className="form-control"
+                name="phone"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.phone}
+              />
             </div>
             <div className="form-group mt-2">
               <label for="password">Password</label>
-              <input type="password" className="form-control" name="password" />
+              <input
+                type="password"
+                className="form-control"
+                name="password"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
             </div>
             <div className="form-group mt-2">
               <label for="confirmPassword">Confirm Password</label>
@@ -76,12 +115,21 @@ const SigninForm = () => {
                 type="password"
                 className="form-control"
                 name="confirmPassword"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.confirmPassword}
               />
             </div>
 
             <div className="form-group mt-2">
               <label for="confirmPassword">Subscription</label>
-              <select className="form-control" name="subscription">
+              <select
+                className="form-control"
+                name="subscription"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.subscription}
+              >
                 <option value="">Select</option>
                 <option value="subscription-1">Free</option>
                 <option value="subscription-2">Pro</option>
@@ -96,6 +144,9 @@ const SigninForm = () => {
                   type="checkbox"
                   value=""
                   id="termsAndCondtions"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.termsAndCondtions}
                 />
                 <label className="form-check-label" htmlFor="termsAndCondtions">
                   Accept terms and conditions.
