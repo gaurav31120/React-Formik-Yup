@@ -1,5 +1,23 @@
 import { Formik } from "formik";
 import React from "react";
+import * as Yup from "yup";
+
+const SignUpSchema = Yup.object().shape({
+  firstName: Yup.string().required("This fiels is required"),
+  email: Yup.string().email("Invalid email").required("This field is required"),
+  phone: Yup.number().required("This field is required"),
+  password: Yup.string()
+    .required("This field is required")
+    .min(6, "must be of 6 characters long"),
+  confirmPassword: Yup.string()
+    .required("This field is required")
+    .min(6, "must be of 6 characters long")
+    .oneOf([Yup.ref("password")], "Password must match"),
+  termsAndCondtions: Yup.boolean().oneOf(
+    [true],
+    "Please accept terms and conditions"
+  ),
+});
 
 const SigninForm = () => {
   return (
@@ -14,37 +32,43 @@ const SigninForm = () => {
           password: "",
           confirmPassword: "",
           subscription: "",
-          termsAndCondtions: "",
+          termsAndCondtions: false,
+          additionalInfoFlag: false,
+          additionalInfo: "",
         }}
-        validate={(values) => {
-          const errors = {};
+        validationSchema={SignUpSchema}
+        // validate={(values) => {
+        //   const errors = {};
 
-          if (!values.firstName) {
-            errors.firstName = "Required";
-          }
+        //   if (!values.firstName) {
+        //     errors.firstName = "Required";
+        //   }
 
-          if (!values.lastName) {
-            errors.lastName = "Required";
-          }
+        //   if (!values.lastName) {
+        //     errors.lastName = "Required";
+        //   }
 
-          if (!values.email) {
-            errors.email = "Required";
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-          ) {
-            errors.email = "Thsi must a valid email";
-          }
-          if (!values.password) {
-            errors.password = "Required";
-          }
+        //   if (!values.email) {
+        //     errors.email = "Required";
+        //   } else if (
+        //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+        //   ) {
+        //     errors.email = "Thsi must a valid email";
+        //   }
+        //   if (!values.password) {
+        //     errors.password = "Required";
+        //   }
 
-          if (!values.confirmPassword) {
-            errors.confirmPassword = "Required";
-          } else if (values.password !== values.confirmPassword) {
-            errors.confirmPassword =
-              "Confirm password must be equal to password";
-          }
-          return errors;
+        //   if (!values.confirmPassword) {
+        //     errors.confirmPassword = "Required";
+        //   } else if (values.password !== values.confirmPassword) {
+        //     errors.confirmPassword =
+        //       "Confirm password must be equal to password";
+        //   }
+        //   return errors;
+        // }}
+        onSubmit={(values) => {
+          console.log(values);
         }}
       >
         {(formik) => (
@@ -153,6 +177,9 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
               />
+              {formik.touched.phone && formik.errors.phone && (
+                <span className="field_error">{formik.errors.phone}</span>
+              )}
             </div>
             <div className="form-group mt-2">
               <label for="password">Password</label>
@@ -201,6 +228,22 @@ const SigninForm = () => {
                 <option value="subscription-3">Enterprise</option>
               </select>
             </div>
+            <div className="form-group mt-2">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="additionalInfo"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.additionalInfo}
+                />
+                <label className="form-check-label" htmlFor="additionalInfo">
+                  Additional Information
+                </label>
+              </div>
+            </div>
 
             <div className="form-group mt-2">
               <div className="form-check">
@@ -213,9 +256,16 @@ const SigninForm = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.termsAndCondtions}
                 />
+
                 <label className="form-check-label" htmlFor="termsAndCondtions">
                   Accept terms and conditions.
                 </label>
+                {formik.touched.termsAndCondtions &&
+                  formik.errors.termsAndCondtions && (
+                    <span className="field_error">
+                      {formik.errors.termsAndCondtions}
+                    </span>
+                  )}
               </div>
             </div>
 
