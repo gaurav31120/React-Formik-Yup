@@ -1,4 +1,4 @@
-import { Formik, Field } from "formik";
+import { Formik, Field, Form } from "formik";
 // import { useFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
@@ -103,7 +103,8 @@ const SigninForm = () => {
         }}
       >
         {(formik) => (
-          <form onSubmit={formik.handleSubmit}>
+          <Form>
+            {/* // <form onSubmit={formik.handleSubmit}> */}
             {console.log(formik)}
 
             <div className="form-group">
@@ -388,7 +389,8 @@ const SigninForm = () => {
                 Sign Up
               </button>
             </div>
-          </form>
+            {/* </form> */}
+          </Form>
         )}
       </Formik>
     </>
