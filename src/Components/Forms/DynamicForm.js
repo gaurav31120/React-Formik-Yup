@@ -6,7 +6,7 @@ const DynamicForm = () => {
     <>
       <Formik
         initialValues={{
-          employees: [],
+          employees: [{ firstname: "", lastName: "", email: "" }],
         }}
         onSubmit={(values) => {
           console.log(values);
@@ -24,6 +24,17 @@ const DynamicForm = () => {
                       {formik.values.employees.map((employees, index) => (
                         <>
                           <div className="mt-2" key={index}>
+                            {index > 0 && (
+                              <div className="float-end">
+                                <button
+                                  type="button"
+                                  className="btn btn-danger"
+                                  onClick={() => arrayHelpers.remove(index)}
+                                >
+                                  Remove
+                                </button>
+                              </div>
+                            )}
                             {
                               <div className="card" style={{ padding: 5 }}>
                                 <div className="card-title">
@@ -43,6 +54,30 @@ const DynamicForm = () => {
                                       id={`Employees.${index}.firstName`}
                                     ></Field>
                                   </div>
+                                  <div className="form-group">
+                                    <label
+                                      htmlFor={`Employees.${index}.lastName`}
+                                    >
+                                      Last Name
+                                    </label>
+                                    <Field
+                                      type="text"
+                                      className="form-control"
+                                      name={`Employees.${index}.lastName`}
+                                      id={`Employees.${index}.lastName`}
+                                    ></Field>
+                                  </div>
+                                  <div className="form-group">
+                                    <label htmlFor={`Employees.${index}.email`}>
+                                      Email
+                                    </label>
+                                    <Field
+                                      type="text"
+                                      className="form-control"
+                                      name={`Employees.${index}.email`}
+                                      id={`Employees.${index}.email`}
+                                    ></Field>
+                                  </div>
                                 </div>
                               </div>
                             }
@@ -57,7 +92,7 @@ const DynamicForm = () => {
                           onClick={() =>
                             arrayHelpers.insert(
                               formik.values.employees.length + 1,
-                              { firstname: "" }
+                              { firstname: "", lastName: "", email: "" }
                             )
                           }
                         >
