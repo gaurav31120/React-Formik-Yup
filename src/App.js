@@ -3,6 +3,7 @@ import "./App.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import SignUpPage from "./Pages/SignUp";
+import DynamicForm from "./Components/Forms/DynamicForm";
 const theme = createTheme();
 
 const App = () => {
@@ -10,7 +11,8 @@ const App = () => {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <SignUpPage />
+        {/* <SignUpPage /> */}
+        <DynamicForm />>
       </ThemeProvider>
     </>
   );
