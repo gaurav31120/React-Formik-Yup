@@ -1,4 +1,4 @@
-import { Formik, Field, Form } from "formik";
+import { Formik, Field, Form, ErrorMessage } from "formik";
 // import { useFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
@@ -118,9 +118,14 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.firstName}
               /> */}
-              {formik.touched.firstName && formik.errors.firstName && (
+              {/* {formik.touched.firstName && formik.errors.firstName && (
                 <span className="field_error">{formik.errors.firstName}</span>
-              )}
+              )} */}
+              <ErrorMessage
+                name="firstName"
+                component="span"
+                className="field_error"
+              />
             </div>
             <div className="form-group mt-2">
               <label for="lastName">Last Name</label>
@@ -134,9 +139,14 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.lastName}
               /> */}
-              {formik.touched.lastName && formik.errors.lastName && (
+              {/* {formik.touched.lastName && formik.errors.lastName && (
                 <span className="field_error">{formik.errors.lastName}</span>
-              )}
+              )} */}
+              <ErrorMessage
+                name="lastName"
+                component="span"
+                className="field_error"
+              />
             </div>
             <div className="form-group mt-2">
               <label>Gender</label>
@@ -221,9 +231,14 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
               /> */}
-              {formik.touched.email && formik.errors.email && (
+              {/* {formik.touched.email && formik.errors.email && (
                 <span className="field_error">{formik.errors.email}</span>
-              )}
+              )} */}
+              <ErrorMessage
+                name="email"
+                component="span"
+                className="field_error"
+              />
             </div>
             <div className="form-group mt-2">
               <label for="phone">Phone Number</label>
@@ -236,9 +251,14 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
               /> */}
-              {formik.touched.phone && formik.errors.phone && (
+              {/* {formik.touched.phone && formik.errors.phone && (
                 <span className="field_error">{formik.errors.phone}</span>
-              )}
+              )} */}
+              <ErrorMessage
+                name="phone"
+                component="span"
+                className="field_error"
+              />
             </div>
             <div className="form-group mt-2">
               <label for="password">Password</label>
@@ -251,9 +271,14 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
               /> */}
-              {formik.touched.password && formik.errors.password && (
+              {/* {formik.touched.password && formik.errors.password && (
                 <span className="field_error">{formik.errors.password}</span>
-              )}
+              )} */}
+              <ErrorMessage
+                name="password"
+                component="span"
+                className="field_error"
+              />
             </div>
             <div className="form-group mt-2">
               <label for="confirmPassword">Confirm Password</label>
@@ -270,12 +295,17 @@ const SigninForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.confirmPassword} */}
               {/* /> */}
-              {formik.touched.confirmPassword &&
+              {/* {formik.touched.confirmPassword &&
                 formik.errors.confirmPassword && (
                   <span className="field_error">
                     {formik.errors.confirmPassword}
                   </span>
-                )}
+                )} */}
+              <ErrorMessage
+                name="confirmPassword"
+                component="span"
+                className="field_error"
+              />
             </div>
 
             <div className="form-group mt-2">
@@ -346,12 +376,17 @@ const SigninForm = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.additionalInfo}
                 ></textarea> */}
-                {formik.touched.additionalInfo &&
+                {/* {formik.touched.additionalInfo &&
                   formik.errors.additionalInfo && (
                     <span className="field_error">
                       {formik.errors.additionalInfo}
                     </span>
-                  )}
+                  )} */}
+                <ErrorMessage
+                  name="additionalInfo"
+                  component="span"
+                  className="field_error"
+                />
               </div>
             )}
 
@@ -375,12 +410,17 @@ const SigninForm = () => {
                 <label className="form-check-label" htmlFor="termsAndCondtions">
                   Accept terms and conditions.
                 </label>
-                {formik.touched.termsAndCondtions &&
+                {/* {formik.touched.termsAndCondtions &&
                   formik.errors.termsAndCondtions && (
                     <span className="field_error">
                       {formik.errors.termsAndCondtions}
                     </span>
-                  )}
+                  )} */}
+                <ErrorMessage
+                  name="termsAndCondtions"
+                  component="span"
+                  className="field_error"
+                />
               </div>
             </div>
 
