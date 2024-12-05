@@ -1,13 +1,26 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
+import * as Yup from "yup";
 
 const DynamicForm = () => {
+  const validationSchema = Yup.object().shape({
+    employees: Yup.array().of(
+      Yup.object().shape({
+        firstName: Yup.string().required("This field is required"),
+        lastName: Yup.string().required("This field is required"),
+        email: Yup.string()
+          .email("Invalid Email")
+          .required("This field is required"),
+      })
+    ),
+  });
   return (
     <>
       <Formik
         initialValues={{
-          employees: [{ firstname: "", lastName: "", email: "" }],
+          employees: [{ firstName: "", lastName: "", email: "" }],
         }}
+        validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);
         }}
@@ -43,40 +56,55 @@ const DynamicForm = () => {
                                 <div className="card-body">
                                   <div className="form-group">
                                     <label
-                                      htmlFor={`Employees.${index}.firstName`}
+                                      htmlFor={`employees.${index}.firstName`}
                                     >
                                       First Name
                                     </label>
                                     <Field
                                       type="text"
                                       className="form-control"
-                                      name={`Employees.${index}.firstName`}
-                                      id={`Employees.${index}.firstName`}
-                                    ></Field>
+                                      name={`employees.${index}.firstName`}
+                                      id={`employees.${index}.firstName`}
+                                    />
+                                    <ErrorMessage
+                                      component="span"
+                                      className="field_error"
+                                      name={`employees.${index}.firstName`}
+                                    />
                                   </div>
                                   <div className="form-group">
                                     <label
-                                      htmlFor={`Employees.${index}.lastName`}
+                                      htmlFor={`employees.${index}.lastName`}
                                     >
                                       Last Name
                                     </label>
                                     <Field
                                       type="text"
                                       className="form-control"
-                                      name={`Employees.${index}.lastName`}
-                                      id={`Employees.${index}.lastName`}
-                                    ></Field>
+                                      name={`employees.${index}.lastName`}
+                                      id={`employees.${index}.lastName`}
+                                    />
+                                    <ErrorMessage
+                                      component="span"
+                                      className="field_error"
+                                      name={`employees.${index}.lastName`}
+                                    />
                                   </div>
                                   <div className="form-group">
-                                    <label htmlFor={`Employees.${index}.email`}>
+                                    <label htmlFor={`employees.${index}.email`}>
                                       Email
                                     </label>
                                     <Field
                                       type="text"
                                       className="form-control"
-                                      name={`Employees.${index}.email`}
-                                      id={`Employees.${index}.email`}
-                                    ></Field>
+                                      name={`employees.${index}.email`}
+                                      id={`employees.${index}.email`}
+                                    />
+                                    <ErrorMessage
+                                      component="span"
+                                      className="field_error"
+                                      name={`employees.${index}.email`}
+                                    />
                                   </div>
                                 </div>
                               </div>
@@ -92,7 +120,7 @@ const DynamicForm = () => {
                           onClick={() =>
                             arrayHelpers.insert(
                               formik.values.employees.length + 1,
-                              { firstname: "", lastName: "", email: "" }
+                              { firstName: "", lastName: "", email: "" }
                             )
                           }
                         >

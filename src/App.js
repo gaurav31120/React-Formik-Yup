@@ -12,7 +12,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {/* <SignUpPage /> */}
-        <DynamicForm />>
+        <DynamicForm />
       </ThemeProvider>
     </>
   );
